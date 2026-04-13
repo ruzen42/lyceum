@@ -1,0 +1,20 @@
+package com.jvmd.lyceum_backend.payload;
+
+import com.jvmd.lyceum_backend.model.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Set;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthResponse {
+    private String token;
+    private String username;
+    private String email;
+    private Set<Role> roles;
+}
