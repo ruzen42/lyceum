@@ -17,7 +17,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=http://backend:8080
+      - VITE_API_URL=http://localhost:8080
     depends_on:
       - backend
     volumes:
@@ -39,5 +39,23 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
 volumes:
   db_data:
+  ollama_data:
