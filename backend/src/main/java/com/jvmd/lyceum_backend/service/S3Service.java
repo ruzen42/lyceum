@@ -26,6 +26,9 @@ public class S3Service {
     private String region;
 
     public String uploadFile(MultipartFile file, String folder) throws IOException {
+        final String shareId = "jw4726zp3biohpndyf7avsg3s45q";
+        final String bucket = "flyceum";
+
         String originalName = file.getOriginalFilename() != null ? file.getOriginalFilename() : "file";
         String key = folder + "/" + UUID.randomUUID() + "_" + originalName;
 
@@ -38,7 +41,7 @@ public class S3Service {
                 RequestBody.fromInputStream(file.getInputStream(), file.getSize())
         );
 
-        return "https://" + bucket + ".s3." + region + ".amazonaws.com/" + key;
+        return "https://link.storjshare.io/s/" + shareId + "/" + bucket + "/" + key + "?wrap=0";
     }
 
     public List<String> uploadFiles(List<MultipartFile> files, String folder) throws IOException {
