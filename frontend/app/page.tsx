@@ -2,6 +2,8 @@ import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { AboutSection } from "@/components/about-section"
 import { NewsSection } from "@/components/news-section"
+import { RecordsSection } from "@/components/records-section"
+import { PortfolioSection } from "@/components/portfolio-section"
 import { AdmissionSection } from "@/components/admission-section"
 import { ContactsSection } from "@/components/contacts-section"
 import { Footer } from "@/components/footer"
@@ -14,6 +16,8 @@ export default function Home() {
         <Hero />
         <AboutSection />
         <NewsSection />
+        <RecordsSection />
+        <PortfolioSection />
         <AdmissionSection />
         <ContactsSection />
       </main>

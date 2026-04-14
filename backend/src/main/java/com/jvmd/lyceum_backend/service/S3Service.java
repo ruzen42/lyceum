@@ -35,7 +35,7 @@ public class S3Service {
                         .key(key)
                         .contentType(file.getContentType())
                         .build(),
-                RequestBody.fromBytes(file.getBytes())
+                RequestBody.fromInputStream(file.getInputStream(), file.getSize())
         );
 
         return "https://" + bucket + ".s3." + region + ".amazonaws.com/" + key;

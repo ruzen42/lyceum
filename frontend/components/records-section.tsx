@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Trophy, Medal, Star, Globe, MapPin, Loader2 } from "lucide-react"
+import { useMemo } from "react"
+import { Trophy, Medal, Star, Loader2 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { api, type Achievement } from "@/lib/api"
+import { useApiData } from "@/hooks/use-api-data"
 
 const LEVEL_COLORS: Record<string, string> = {
   Международный: "bg-yellow-500/10 text-yellow-600 border-yellow-500/20",
@@ -89,24 +89,17 @@ const PLACE_ICON: Record<string, typeof Trophy> = {
 }
 
 export function RecordsSection() {
-  const [achievements, setAchievements] = useState<Achievement[]>(FALLBACK)
-  const [loading, setLoading] = useState(true)
+  const { data: achievements, loading } = useApiData(api.achievements.getAll, FALLBACK)
 
-  useEffect(() => {
-    api.achievements
-      .getAll()
-      .then((data) => {
-        if (data && data.length > 0) setAchievements(data)
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false))
-  }, [])
-
-  const grouped = achievements.reduce<Record<string, Achievement[]>>((acc, a) => {
-    acc[a.category] = acc[a.category] || []
-    acc[a.category].push(a)
-    return acc
-  }, {})
+  const grouped = useMemo(
+    () =>
+      achievements.reduce<Record<string, Achievement[]>>((acc, a) => {
+        acc[a.category] = acc[a.category] || []
+        acc[a.category].push(a)
+        return acc
+      }, {}),
+    [achievements],
+  )
 
   return (
     <section id="records" className="bg-muted/30 py-16 sm:py-24">

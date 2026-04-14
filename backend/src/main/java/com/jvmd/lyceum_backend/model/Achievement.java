@@ -1,21 +1,20 @@
 package com.jvmd.lyceum_backend.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "news")
+@Table(name = "achievements")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class News {
+public class Achievement {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -25,18 +24,24 @@ public class News {
     private String title;
 
     @Column(nullable = false)
-    private String content;
+    private String description;
 
-    private String imageUrl;
-
+    @Column(nullable = false)
     private String category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"news", "password", "roles", "authorities", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled", "hibernateLazyInitializer", "handler"})
-    private User user;
+    @Column(nullable = false, name = "student_name")
+    private String studentName;
+
+    @Column(nullable = false)
+    private int year;
+
+    @Column(nullable = false)
+    private String place;
+
+    @Column(nullable = false)
+    private String level;
 
     @Column(name = "created_at", nullable = false)
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
-
 }

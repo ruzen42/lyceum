@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Calendar, ChevronRight, Eye, Loader2 } from "lucide-react"
+import { useState } from "react"
+import { Calendar, ChevronRight, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { api, type NewsItem } from "@/lib/api"
+import { useApiData } from "@/hooks/use-api-data"
 
 const FALLBACK_NEWS: NewsItem[] = [
   {
@@ -60,20 +61,7 @@ function formatDate(iso: string) {
 
 export function NewsSection() {
   const [activeCategory, setActiveCategory] = useState("Все")
-  const [news, setNews] = useState<NewsItem[]>(FALLBACK_NEWS)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    api.news
-      .getAll()
-      .then((data) => {
-        if (data && data.length > 0) setNews(data)
-      })
-      .catch(() => {
-        // fallback data already set
-      })
-      .finally(() => setLoading(false))
-  }, [])
+  const { data: news, loading } = useApiData(api.news.getAll, FALLBACK_NEWS)
 
   const filteredNews =
     activeCategory === "Все"

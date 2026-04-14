@@ -20,7 +20,7 @@ public class NewsService {
 
     @Transactional(readOnly = true)
     public List<News> getAll() {
-        return newsRepository.findAll();
+        return newsRepository.findAllByOrderByCreatedAtDesc();
     }
 
     public News saveWithImage(String title, String content, MultipartFile image, User author) throws IOException {
