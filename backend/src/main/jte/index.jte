@@ -19,7 +19,7 @@
     content = @`
         <section class="hero">
             <div class="container">
-                <h1>Добро пожаловать в <span>Лицей №1</span></h1>
+                <h1>Добро пожаловать в <span>Первый IT лицей</span></h1>
                 <p>Место, где рождаются знания, формируется характер и открываются возможности для каждого ученика.</p>
                 <div class="hero-actions">
                     <a href="/admission" class="btn btn-accent btn-lg">Подать заявку</a>

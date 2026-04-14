@@ -13,15 +13,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title} — Лицей №1</title>
+    <title>${title} — Первый IT лицей</title>
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
 <header class="site-header">
     <div class="header-inner">
-        <a href="/" class="site-logo">Лицей <span>№1</span></a>
+        <a href="/" class="site-logo-wrapper">
+            <img src="/img/icon.png" alt="Lyceum Logo" class="header-logo-img">
+        </a>
         <nav class="site-nav">
+
             <a href="/" class="${activePage.equals("home") ? "active" : ""}">Главная</a>
             <a href="/news" class="${activePage.equals("news") ? "active" : ""}">Новости</a>
             <a href="/achievements" class="${activePage.equals("achievements") ? "active" : ""}">Достижения</a>
@@ -42,7 +45,8 @@
             @else
                 <a href="/login" class="btn btn-outline-white btn-sm">Войти</a>
             @endif
-            <button class="menu-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">☰</button>
+            <button class="menu-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">☰
+            </button>
         </div>
     </div>
     <nav class="mobile-nav" id="mobileNav">
@@ -72,7 +76,7 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>Лицей №1</h4>
+                <h4>Первый IT лицей</h4>
                 <p>Качественное образование для будущих лидеров</p>
             </div>
             <div class="footer-col">
@@ -90,14 +94,13 @@
             </div>
             <div class="footer-col">
                 <h4>Контакты</h4>
-                <p>г. Москва, ул. Школьная, 1</p>
-                <p>+7 (495) 000-00-00</p>
-                <p>lyceum@school.ru</p>
+                <p>г. Петропавловск, ул. Жамбыла улица, 196</p>
+                <p>+7 705 101 7879</p>
+                <p>vakin83@list.ru</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <span>© 2025 Лицей №1. Все права защищены.</span>
-            <span>Образование. Наука. Будущее.</span>
+            <span>© 2026 Первый IT лицей. Все права защищены.</span>
         </div>
     </div>
 </footer>

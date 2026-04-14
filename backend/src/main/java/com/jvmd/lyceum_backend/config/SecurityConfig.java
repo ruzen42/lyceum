@@ -66,7 +66,7 @@ public class SecurityConfig {
                                 "/achievements", "/portfolio", "/museum", "/museum/**",
                                 "/classrooms", "/classrooms/**",
                                 "/login", "/register",
-                                "/css/**", "/js/**", "/images/**"
+                                "/css/**", "/js/**", "/img/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

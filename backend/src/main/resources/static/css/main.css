@@ -1,9 +1,7 @@
-/* =============================================
-   LYCEUM — Школьный сайт | Основные стили
-   ============================================= */
+
 
 :root {
-    --primary: #1d3557;
+    --primary: #ffffff;
     --primary-hover: #2b4d7d;
     --secondary: #457b9d;
     --accent: #e9c46a;
@@ -12,6 +10,7 @@
     --warning: #f4a261;
     --bg: #f1f3f5;
     --white: #ffffff;
+    --black: #000000;
     --text: #212529;
     --text-muted: #6c757d;
     --border: #dee2e6;
@@ -44,10 +43,9 @@ a:hover { color: var(--primary); text-decoration: underline; }
 
 img { max-width: 100%; height: auto; display: block; }
 
-/* ─── Header ─── */
 .site-header {
     background: var(--primary);
-    color: var(--white);
+    color: var(--black);
     height: var(--header-h);
     position: sticky;
     top: 0;
@@ -84,7 +82,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .site-nav a {
-    color: rgba(255,255,255,0.82);
+    color: rgba(0, 0, 0, 0.82);
     font-size: 0.875rem;
     font-weight: 500;
     padding: 0.4rem 0.7rem;
@@ -93,6 +91,7 @@ img { max-width: 100%; height: auto; display: block; }
     text-decoration: none;
     white-space: nowrap;
 }
+
 .site-nav a:hover, .site-nav a.active {
     background: rgba(255,255,255,0.15);
     color: var(--white);
@@ -684,7 +683,46 @@ tbody tr:hover { background: #e8eef4; }
     .section { padding: 2rem 0; }
     .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
 }
+/* Контейнер для логотипа и текста */
+.site-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Расстояние между картинкой и текстом */
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
 
+.site-logo-wrapper:hover {
+    transform: scale(1.02);
+}
+
+/* Стили самой картинки */
+.header-logo-img {
+    height: 48px; /* Чуть меньше высоты хедера (72px) */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* Легкая тень под лого */
+}
+
+/* Текст рядом с логотипом */
+.logo-text {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.logo-text span {
+    color: var(--accent);
+}
+
+/* Адаптив: на мобилках можно скрыть текст, оставив только иконку */
+@media (max-width: 480px) {
+    .logo-text {
+        display: none;
+    }
+}
 /* ─── Hamburger Menu (Mobile) ─── */
 .menu-toggle {
     display: none;
