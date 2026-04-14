@@ -33,7 +33,7 @@ public class News {
     @JsonIgnoreProperties({"news", "password", "roles", "authorities", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled", "hibernateLazyInitializer", "handler"})
     private User user;
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
