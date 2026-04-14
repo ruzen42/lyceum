@@ -4,6 +4,8 @@ import { AboutSection } from "@/components/about-section"
 import { NewsSection } from "@/components/news-section"
 import { RecordsSection } from "@/components/records-section"
 import { PortfolioSection } from "@/components/portfolio-section"
+import { MuseumSection } from "@/components/museum-section"
+import { ClassroomsSection } from "@/components/classrooms-section"
 import { AdmissionSection } from "@/components/admission-section"
 import { ContactsSection } from "@/components/contacts-section"
 import { Footer } from "@/components/footer"
@@ -18,6 +20,8 @@ export default function Home() {
         <NewsSection />
         <RecordsSection />
         <PortfolioSection />
+        <MuseumSection />
+        <ClassroomsSection />
         <AdmissionSection />
         <ContactsSection />
       </main>
