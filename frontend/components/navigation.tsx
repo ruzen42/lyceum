@@ -21,7 +21,9 @@ import { Moon, Sun } from "lucide-react"
 const navigation = [
   { name: "Новости", href: "/news", icon: Newspaper },
   { name: "Музей", href: "/museum", icon: Building },
-  { name: "Классы", href: "/classrooms", icon: GraduationCap },
+  { name: "История", href: "/history", icon: GraduationCap },
+  { name: "Достижения", href: "/achievements", icon: GraduationCap },
+  { name: "Библиотека", href: "/library", icon: GraduationCap },
 ]
 
 export function Navigation() {
@@ -39,21 +41,17 @@ export function Navigation() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-16 items-center justify-between px-4 lg:px-8">
         <div className="flex items-center space-x-4">
-          <Link href="/news" className="flex items-center space-x-3 group">
-            <div className="relative">
+          <Link href="/news" className="flex items-center group">
+            <div className="relative h-12 w-auto flex items-center">
               <img 
                 src="/img.png" 
                 alt="Лицей" 
-                className="h-8 w-8 rounded-lg object-cover transition-transform group-hover:scale-105"
+                className="max-h-full object-contain transition-transform group-hover:scale-105"
               />
-              <div className="absolute -inset-1 bg-primary/20 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <span className="hidden font-bold text-xl sm:inline-block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Лицей
-            </span>
           </Link>
         </div>
 

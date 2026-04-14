@@ -75,14 +75,14 @@ export default function NewsPage() {
         formData.append("image", image)
       }
       await apiClient.post("/api/news/new", formData)
-      toast.success("News created successfully!")
+      toast.success("Новость успешно создана!")
       setIsDialogOpen(false)
       setTitle("")
       setContent("")
       setImage(null)
       fetchNews()
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to create news")
+      toast.error(error instanceof Error ? error.message : "Не удалось создать новость")
     } finally {
       setIsSubmitting(false)
     }
@@ -101,46 +101,46 @@ export default function NewsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">News</h1>
-            <p className="text-muted-foreground mt-1">Stay updated with the latest news</p>
+            <h1 className="text-3xl font-bold text-foreground">Новости</h1>
+            <p className="text-muted-foreground mt-1">Будьте в курсе последних событий</p>
           </div>
           {canCreate && (
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button>
                   <Plus className="size-4" />
-                  Create News
+                  Создать новость
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Create News</DialogTitle>
-                  <DialogDescription>Add a new news article to the platform.</DialogDescription>
+                  <DialogTitle>Создать новость</DialogTitle>
+                  <DialogDescription>Добавьте новую новость на платформу.</DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="title">Title</Label>
+                    <Label htmlFor="title">Заголовок</Label>
                     <Input
                       id="title"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                      placeholder="Enter news title"
+                      placeholder="Введите заголовок новости"
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="content">Content</Label>
+                    <Label htmlFor="content">Содержание</Label>
                     <Textarea
                       id="content"
                       value={content}
                       onChange={(e) => setContent(e.target.value)}
-                      placeholder="Write the news content..."
-                      rows={5}
+                      placeholder="Напишите содержание новости здесь..."
+                      rows={4}
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="image">Image (optional)</Label>
+                    <Label htmlFor="image">Изображение</Label>
                     <Input
                       id="image"
                       type="file"
@@ -150,7 +150,7 @@ export default function NewsPage() {
                   </div>
                   <DialogFooter>
                     <Button type="submit" disabled={isSubmitting}>
-                      {isSubmitting ? <Spinner className="size-4" /> : "Create"}
+                      {isSubmitting ? <Spinner className="size-4" /> : "Создать"}
                     </Button>
                   </DialogFooter>
                 </form>
@@ -166,7 +166,7 @@ export default function NewsPage() {
         ) : news.length === 0 ? (
           <Card className="border-primary/20">
             <CardContent className="py-12 text-center">
-              <p className="text-muted-foreground">No news articles yet.</p>
+              <p className="text-muted-foreground">Новостей пока нет.</p>
             </CardContent>
           </Card>
         ) : (
