@@ -19,7 +19,6 @@ import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 
 const navigation = [
-  { name: "Главная", href: "/news", icon: Home },
   { name: "Новости", href: "/news", icon: Newspaper },
   { name: "Музей", href: "/museum", icon: Building },
   { name: "Классы", href: "/classrooms", icon: GraduationCap },
