@@ -16,7 +16,7 @@
     content = @`
         <div class="page-header bellota-bold">
             <div class="container">
-                <h1>Новости</h1>
+                <h1 class="bellota-bold">Новости</h1>
                 <p>Актуальные события и публикации нашей школы</p>
             </div>
         </div>
@@ -45,7 +45,7 @@
                                     @if(news.getCategory() != null)
                                         <span class="badge badge-secondary">${news.getCategory()}</span>
                                     @endif
-                                    <h2 class="card-title" style="margin-top:0.5rem">${news.getTitle()}</h2>
+                                    <h2 class="card-title bellota-bold" style="margin-top:0.5rem">${news.getTitle()}</h2>
                                     <p class="card-text">${news.getContent()}</p>
                                     <div class="card-meta" style="margin-top:1rem">
                                         @if(news.getUser() != null)

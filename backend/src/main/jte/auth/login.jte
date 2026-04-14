@@ -18,7 +18,7 @@
 
 <div class="auth-page">
     <div class="auth-card">
-        <h1>Вход в систему</h1>
+        <h1 class="bellota-bold">Вход в систему</h1>
         <p class="subtitle">Введите ваши данные для входа</p>
 
         @if(error != null)

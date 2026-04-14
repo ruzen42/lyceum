@@ -13,9 +13,9 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
-                <h1>Достижения учеников</h1>
+                <h1 class="bellota-bold">Достижения учеников</h1>
                 <p>Гордость нашей школы — успехи наших учеников на олимпиадах и конкурсах</p>
             </div>
         </div>
@@ -35,7 +35,7 @@
                                     <div class="achievement-level ${a.getLevel().toLowerCase().contains("золот") || a.getLevel().equalsIgnoreCase("gold") || a.getLevel().equals("1") ? "level-gold" : a.getLevel().toLowerCase().contains("серебр") || a.getLevel().equalsIgnoreCase("silver") || a.getLevel().equals("2") ? "level-silver" : a.getLevel().toLowerCase().contains("бронз") || a.getLevel().equalsIgnoreCase("bronze") || a.getLevel().equals("3") ? "level-bronze" : "level-other"}">
                                         ${a.getLevel()}
                                     </div>
-                                    <h3 class="card-title">${a.getTitle()}</h3>
+                                    <h3 class="card-title bellota-bold">${a.getTitle()}</h3>
                                     <p class="card-text" style="margin-bottom:0.4rem">${a.getDescription()}</p>
                                     <div class="card-meta">
                                         <span class="badge badge-primary">${a.getCategory()}</span>

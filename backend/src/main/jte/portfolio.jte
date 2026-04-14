@@ -13,9 +13,9 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
-                <h1>Портфолио студентов</h1>
+                <h1 class="bellota-bold">Портфолио студентов</h1>
                 <p>Знакомьтесь с нашими талантливыми учениками</p>
             </div>
         </div>
@@ -39,7 +39,7 @@
                                             <div class="portfolio-avatar-placeholder">👤</div>
                                         @endif
                                         <div style="flex:1">
-                                            <h3 class="card-title" style="margin-bottom:0.2rem">${p.getStudentName()}</h3>
+                                            <h3 class="card-title bellota-bold" style="margin-bottom:0.2rem">${p.getStudentName()}</h3>
                                             <span class="badge badge-secondary">${p.getGrade()}</span>
                                         </div>
                                     </div>

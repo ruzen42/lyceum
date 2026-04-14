@@ -12,12 +12,12 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
                 <div style="font-size:0.875rem;margin-bottom:0.5rem">
                     <a href="/museum" style="color:rgba(255,255,255,0.7)">← Музей</a>
                 </div>
-                <h1>${exhibit.getTitle()}</h1>
+                <h1 class="bellota-bold">${exhibit.getTitle()}</h1>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
 
                 @if(!exhibit.getRelatedExhibits().isEmpty())
                     <hr class="divider">
-                    <h2 style="font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:1.25rem">Связанные экспонаты</h2>
+                    <h2 class="bellota-bold" style="font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:1.25rem">Связанные экспонаты</h2>
                     <div class="grid grid-3">
                         @for(MuseumExhibit rel : exhibit.getRelatedExhibits())
                             <div class="card">
@@ -51,7 +51,7 @@
                                     <div class="card-img-placeholder">🏛️</div>
                                 @endif
                                 <div class="card-body">
-                                    <h3 class="card-title">${rel.getTitle()}</h3>
+                                    <h3 class="card-title bellota-bold">${rel.getTitle()}</h3>
                                 </div>
                                 <div class="card-footer">
                                     <a href="/museum/${rel.getId()}" class="btn btn-primary btn-sm">Смотреть</a>

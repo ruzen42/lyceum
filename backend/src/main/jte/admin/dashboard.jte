@@ -19,7 +19,7 @@
     content = @`
         <div class="admin-layout">
             <aside class="admin-sidebar">
-                <h3>Контент</h3>
+                <h3 class="bellota-bold">Контент</h3>
                 @if(isTeacher)
                     <a href="#news" onclick="showTab('news',this);return false">📰 Новости</a>
                     <a href="#achievements" onclick="showTab('achievements',this);return false">🏆 Достижения</a>
@@ -28,7 +28,7 @@
                     <a href="#materials" onclick="showTab('materials',this);return false">📄 Материалы</a>
                 @endif
                 @if(isAdmin)
-                    <h3>Управление</h3>
+                    <h3 class="bellota-bold">Управление</h3>
                     <a href="#vacancies" onclick="showTab('vacancies',this);return false">💼 Вакансии</a>
                     <a href="#classrooms" onclick="showTab('classrooms',this);return false">📚 Кабинеты</a>
                     <a href="#admissions" onclick="showTab('admissions',this);return false">📋 Заявки</a>
@@ -37,7 +37,7 @@
 
             <div class="admin-main">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
-                    <h1 style="font-size:1.5rem;font-weight:800;color:var(--primary)">Панель управления</h1>
+                    <h1 class="bellota-bold" style="font-size:1.5rem;font-weight:800;color:var(--primary)">Панель управления</h1>
                     <div>
                         <span style="font-size:0.875rem;color:var(--text-muted)">
                             ${currentUser}
@@ -58,9 +58,8 @@
                 @endif
 
                 @if(isTeacher)
-                    <%-- ─── НОВОСТИ ─── --%>
                     <div class="admin-section" id="tab-news">
-                        <h2>📰 Добавить новость</h2>
+                        <h2 class="bellota-bold">📰 Добавить новость</h2>
                         <form method="post" action="/admin/news" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group">
@@ -80,9 +79,8 @@
                         </form>
                     </div>
 
-                    <%-- ─── ДОСТИЖЕНИЯ ─── --%>
                     <div class="admin-section" id="tab-achievements" style="display:none">
-                        <h2>🏆 Добавить достижение</h2>
+                        <h2 class="bellota-bold">🏆 Добавить достижение</h2>
                         <form method="post" action="/admin/achievements">
                             <div class="form-row">
                                 <div class="form-group">
@@ -124,7 +122,7 @@
 
                     <%-- ─── ПОРТФОЛИО ─── --%>
                     <div class="admin-section" id="tab-portfolio" style="display:none">
-                        <h2>👤 Добавить портфолио</h2>
+                        <h2 class="bellota-bold">👤 Добавить портфолио</h2>
                         <form method="post" action="/admin/portfolio" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group">
@@ -160,7 +158,7 @@
 
                     <%-- ─── МУЗЕЙ ─── --%>
                     <div class="admin-section" id="tab-museum" style="display:none">
-                        <h2>🏛️ Добавить экспонат</h2>
+                        <h2 class="bellota-bold">🏛️ Добавить экспонат</h2>
                         <form method="post" action="/admin/museum" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Название *</label>
@@ -181,7 +179,7 @@
 
                     <%-- ─── МАТЕРИАЛЫ ─── --%>
                     <div class="admin-section" id="tab-materials" style="display:none">
-                        <h2>📄 Добавить материал в кабинет</h2>
+                        <h2 class="bellota-bold">📄 Добавить материал в кабинет</h2>
                         <form method="post" action="/admin/materials" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>ID кабинета *</label>
@@ -209,9 +207,8 @@
                 @endif
 
                 @if(isAdmin)
-                    <%-- ─── ВАКАНСИИ ─── --%>
                     <div class="admin-section" id="tab-vacancies" style="${isTeacher ? "display:none" : ""}">
-                        <h2>💼 Управление вакансиями</h2>
+                        <h2 class="bellota-bold">💼 Управление вакансиями</h2>
                         <form method="post" action="/admin/vacancies" style="margin-bottom:1.5rem">
                             <div class="form-group">
                                 <label>Название вакансии *</label>
@@ -225,9 +222,8 @@
                         </form>
                     </div>
 
-                    <%-- ─── КАБИНЕТЫ ─── --%>
                     <div class="admin-section" id="tab-classrooms" style="display:none">
-                        <h2>📚 Создать кабинет</h2>
+                        <h2 class="bellota-bold">📚 Создать кабинет</h2>
                         <form method="post" action="/admin/classrooms">
                             <div class="form-group">
                                 <label>Название кабинета *</label>
@@ -239,7 +235,7 @@
 
                     <%-- ─── ЗАЯВКИ ─── --%>
                     <div class="admin-section" id="tab-admissions" style="display:none">
-                        <h2>📋 Заявки на поступление</h2>
+                        <h2 class="bellota-bold">📋 Заявки на поступление</h2>
                         @if(applications == null || applications.isEmpty())
                             <div class="empty-state" style="padding:1.5rem 0">
                                 <div class="empty-state-icon">📋</div>

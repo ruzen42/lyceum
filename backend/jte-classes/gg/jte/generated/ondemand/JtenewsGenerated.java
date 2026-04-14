@@ -11,7 +11,7 @@ public final class JtenewsGenerated {
 		jteOutput.writeContent("\n");
 		gg.jte.generated.ondemand.JtelayoutGenerated.render(jteOutput, jteHtmlInterceptor, "Новости", new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
-				jteOutput.writeContent("\n        <div class=\"page-header bellota-bold\">\n            <div class=\"container\">\n                <h1>Новости</h1>\n                <p>Актуальные события и публикации нашей школы</p>\n            </div>\n        </div>\n\n        <section class=\"section\">\n            <div class=\"container\">\n                ");
+				jteOutput.writeContent("\n        <div class=\"page-header bellota-bold\">\n            <div class=\"container\">\n                <h1 class=\"bellota-bold\">Новости</h1>\n                <p>Актуальные события и публикации нашей школы</p>\n            </div>\n        </div>\n\n        <section class=\"section\">\n            <div class=\"container\">\n                ");
 				if (success != null) {
 					jteOutput.writeContent("\n                    <div class=\"alert alert-success\">✓ ");
 					jteOutput.setContext("div", null);
@@ -54,7 +54,7 @@ public final class JtenewsGenerated {
 							jteOutput.writeUserContent(news.getCategory());
 							jteOutput.writeContent("</span>\n                                    ");
 						}
-						jteOutput.writeContent("\n                                    <h2 class=\"card-title\" style=\"margin-top:0.5rem\">");
+						jteOutput.writeContent("\n                                    <h2 class=\"card-title bellota-bold\" style=\"margin-top:0.5rem\">");
 						jteOutput.setContext("h2", null);
 						jteOutput.writeUserContent(news.getTitle());
 						jteOutput.writeContent("</h2>\n                                    <p class=\"card-text\">");

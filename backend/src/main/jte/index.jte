@@ -54,7 +54,7 @@
         <section class="section bellota-bold">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Последние новости</h2>
+                    <h2 class="section-title bellota-bold">Последние новости</h2>
                     <a href="/news" class="section-link">Все новости →</a>
                 </div>
                 @if(recentNews.isEmpty())
@@ -75,7 +75,7 @@
                                     @if(news.getCategory() != null)
                                         <span class="badge badge-secondary mb-1">${news.getCategory()}</span>
                                     @endif
-                                    <h3 class="card-title">${news.getTitle()}</h3>
+                                    <h3 class="card-title bellota-bold">${news.getTitle()}</h3>
                                     <p class="card-text">${news.getContent().length() > 120 ? news.getContent().substring(0, 120) + "..." : news.getContent()}</p>
                                     <div class="card-meta">
                                         @if(news.getUser() != null)
@@ -94,7 +94,7 @@
         <section class="section section-alt">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Достижения учеников</h2>
+                    <h2 class="section-title bellota-bold">Достижения учеников</h2>
                     <a href="/achievements" class="section-link">Все достижения →</a>
                 </div>
                 @if(recentAchievements.isEmpty())
@@ -110,7 +110,7 @@
                                     <div class="achievement-level ${a.getLevel().toLowerCase().contains("золот") || a.getLevel().equalsIgnoreCase("gold") || a.getLevel().equals("1") ? "level-gold" : a.getLevel().toLowerCase().contains("серебр") || a.getLevel().equalsIgnoreCase("silver") || a.getLevel().equals("2") ? "level-silver" : a.getLevel().toLowerCase().contains("бронз") || a.getLevel().equalsIgnoreCase("bronze") || a.getLevel().equals("3") ? "level-bronze" : "level-other"}">
                                         ${a.getLevel()}
                                     </div>
-                                    <h3 class="card-title">${a.getTitle()}</h3>
+                                    <h3 class="card-title bellota-bold">${a.getTitle()}</h3>
                                     <p class="card-text">${a.getStudentName()} · ${a.getYear()}</p>
                                     <p class="card-text">${a.getPlace()}</p>
                                     <div class="card-meta">
@@ -129,19 +129,19 @@
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
                     <div style="background:var(--primary);color:white;border-radius:var(--radius-lg);padding:2rem">
                         <div style="font-size:2rem;margin-bottom:0.75rem">🏛️</div>
-                        <h3 style="font-size:1.2rem;margin-bottom:0.5rem">Школьный музей</h3>
+                        <h3 class="bellota-bold" style="font-size:1.2rem;margin-bottom:0.5rem">Школьный музей</h3>
                         <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;margin-bottom:1rem">Узнайте историю нашей школы через уникальные экспонаты и архивные материалы.</p>
                         <a href="/museum" class="btn btn-accent btn-sm">Посетить музей</a>
                     </div>
                     <div style="background:var(--secondary);color:white;border-radius:var(--radius-lg);padding:2rem">
                         <div style="font-size:2rem;margin-bottom:0.75rem">📚</div>
-                        <h3 style="font-size:1.2rem;margin-bottom:0.5rem">Учебные кабинеты</h3>
+                        <h3 class="bellota-bold" style="font-size:1.2rem;margin-bottom:0.5rem">Учебные кабинеты</h3>
                         <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;margin-bottom:1rem">Доступ к материалам, ресурсам и расписанию учебных кабинетов школы.</p>
                         <a href="/classrooms" class="btn btn-outline-white btn-sm">Смотреть кабинеты</a>
                     </div>
                     <div style="background:#2a9d8f;color:white;border-radius:var(--radius-lg);padding:2rem">
                         <div style="font-size:2rem;margin-bottom:0.75rem">📋</div>
-                        <h3 style="font-size:1.2rem;margin-bottom:0.5rem">Поступление</h3>
+                        <h3 class="bellota-bold" style="font-size:1.2rem;margin-bottom:0.5rem">Поступление</h3>
                         <p style="color:rgba(255,255,255,0.75);font-size:0.875rem;margin-bottom:1rem">Запишите ребёнка в наш лицей. Мы принимаем детей в 1 класс и дошкольную группу.</p>
                         <a href="/admission" class="btn btn-outline-white btn-sm">Подать заявку</a>
                     </div>

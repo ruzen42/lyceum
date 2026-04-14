@@ -12,9 +12,9 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
-                <h1>Поступление в лицей</h1>
+                <h1 class="bellota-bold">Поступление в лицей</h1>
                 <p>Заполните заявку, и мы свяжемся с вами в течение 2–3 рабочих дней</p>
             </div>
         </div>
@@ -33,17 +33,17 @@
                 @endif
 
                 <div class="admission-section">
-                    <h2 style="font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem">Заявка на поступление</h2>
+                    <h2 class="bellota-bold" style="font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem">Заявка на поступление</h2>
 
                     <form method="post" action="/admission">
-                        <h3 style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem">Информация о родителе</h3>
+                        <h3 class="bellota-bold" style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem">Информация о родителе</h3>
                         <div class="form-group">
                             <label for="parentName">ФИО родителя / опекуна *</label>
                             <input type="text" id="parentName" name="parentName" class="form-control" required placeholder="Иванов Иван Иванович">
                         </div>
 
                         <hr class="divider">
-                        <h3 style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem">Информация о ребёнке</h3>
+                        <h3 class="bellota-bold" style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem">Информация о ребёнке</h3>
 
                         <div class="form-row">
                             <div class="form-group">
@@ -66,7 +66,7 @@
                         </div>
 
                         <hr class="divider">
-                        <h3 style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem">Контактные данные</h3>
+                        <h3 class="bellota-bold" style="font-size:1rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem">Контактные данные</h3>
 
                         <div class="form-row">
                             <div class="form-group">

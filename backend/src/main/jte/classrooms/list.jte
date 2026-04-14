@@ -13,9 +13,9 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
-                <h1>Учебные кабинеты</h1>
+                <h1 class="bellota-bold">Учебные кабинеты</h1>
                 <p>Материалы, ресурсы и информация по каждому кабинету</p>
             </div>
         </div>
@@ -33,7 +33,7 @@
                             <div class="card">
                                 <div class="card-img-placeholder" style="height:130px;font-size:3rem">📚</div>
                                 <div class="card-body">
-                                    <h3 class="card-title">${c.getTitle()}</h3>
+                                    <h3 class="card-title bellota-bold">${c.getTitle()}</h3>
                                     <div class="card-meta">
                                         <span>📄 ${c.getMaterials().size()} материалов</span>
                                     </div>

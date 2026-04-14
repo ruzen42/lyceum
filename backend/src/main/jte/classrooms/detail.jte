@@ -13,12 +13,12 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
                 <div style="font-size:0.875rem;margin-bottom:0.5rem">
                     <a href="/classrooms" style="color:rgba(255,255,255,0.7)">← Кабинеты</a>
                 </div>
-                <h1>${classroom.getTitle()}</h1>
+                <h1 class="bellota-bold">${classroom.getTitle()}</h1>
             </div>
         </div>
 
@@ -33,7 +33,7 @@
                         @endif
 
                         <div>
-                            <h2 style="font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:1rem">
+                            <h2 class="bellota-bold" style="font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:1rem">
                                 Учебные материалы
                                 <span class="badge badge-secondary" style="margin-left:0.5rem">${classroom.getMaterials().size()}</span>
                             </h2>
@@ -74,7 +74,7 @@
 
                     <aside>
                         <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;position:sticky;top:calc(var(--header-h) + 1rem)">
-                            <h3 style="font-size:0.875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted);margin-bottom:1rem">О кабинете</h3>
+                            <h3 class="bellota-bold" style="font-size:0.875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted);margin-bottom:1rem">О кабинете</h3>
                             <div style="font-size:0.875rem">
                                 <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border-light)">
                                     <span style="color:var(--text-muted)">Название</span>

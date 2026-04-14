@@ -18,7 +18,7 @@
 
 <div class="auth-page">
     <div class="auth-card">
-        <h1>Регистрация</h1>
+        <h1 class="bellota-bold">Регистрация</h1>
         <p class="subtitle">Создайте аккаунт для доступа к порталу</p>
 
         @if(error != null)

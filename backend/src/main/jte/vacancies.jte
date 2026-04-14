@@ -13,9 +13,9 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
-                <h1>Вакансии</h1>
+                <h1 class="bellota-bold">Вакансии</h1>
                 <p>Присоединяйтесь к нашей команде профессионалов</p>
             </div>
         </div>
@@ -32,7 +32,7 @@
                         <div class="vacancy-card">
                             <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem">
                                 <div>
-                                    <h3>${v.getTitle()}</h3>
+                                    <h3 class="bellota-bold">${v.getTitle()}</h3>
                                     @if(v.getDescription() != null && !v.getDescription().isBlank())
                                         <p style="margin-top:0.5rem">${v.getDescription()}</p>
                                     @endif

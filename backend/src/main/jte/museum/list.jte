@@ -13,9 +13,9 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
-                <h1>Школьный музей</h1>
+                <h1 class="bellota-bold">Школьный музей</h1>
                 <p>Сохраняем историю. Вдохновляем будущее.</p>
             </div>
         </div>
@@ -37,7 +37,7 @@
                                     <div class="card-img-placeholder">🏛️</div>
                                 @endif
                                 <div class="card-body">
-                                    <h3 class="card-title">${e.getTitle()}</h3>
+                                    <h3 class="card-title bellota-bold">${e.getTitle()}</h3>
                                     @if(e.getDescription() != null)
                                         <p class="card-text">${e.getDescription().length() > 100 ? e.getDescription().substring(0, 100) + "..." : e.getDescription()}</p>
                                     @endif
