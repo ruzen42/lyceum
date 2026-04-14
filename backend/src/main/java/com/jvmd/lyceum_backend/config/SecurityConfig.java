@@ -55,15 +55,33 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/error",
+                        .requestMatchers(
+                                "/api/auth/**", "/error",
                                 "/api/news/get-all", "/api/achievements/get-all", "/api/portfolio/get-all",
-                                "/api/vacancies/get-all", "/api/admission/apply", "/api/stats"
+                                "/api/vacancies/get-all", "/api/admission/apply", "/api/stats",
+                                "/", "/news", "/news/**", "/vacancies", "/admission",
+                                "/achievements", "/portfolio", "/museum", "/museum/**",
+                                "/classrooms", "/classrooms/**",
+                                "/login", "/register",
+                                "/css/**", "/js/**", "/images/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            String accept = request.getHeader("Accept");
+                            if (accept != null && accept.contains("text/html")) {
+                                response.sendRedirect("/login");
+                            } else {
+                                response.sendError(401);
+                            }
+                        })
                 )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

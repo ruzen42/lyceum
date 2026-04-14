@@ -1,6 +1,7 @@
 package com.jvmd.lyceum_backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jvmd.lyceum_backend.controller.rest.AuthController;
 import com.jvmd.lyceum_backend.model.Role;
 import com.jvmd.lyceum_backend.payload.AuthResponse;
 import com.jvmd.lyceum_backend.payload.LoginRequest;

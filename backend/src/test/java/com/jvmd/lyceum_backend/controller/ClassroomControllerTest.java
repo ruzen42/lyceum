@@ -1,5 +1,6 @@
 package com.jvmd.lyceum_backend.controller;
 
+import com.jvmd.lyceum_backend.controller.rest.ClassroomController;
 import com.jvmd.lyceum_backend.model.Classroom;
 import com.jvmd.lyceum_backend.model.Material;
 import com.jvmd.lyceum_backend.service.ClassroomService;

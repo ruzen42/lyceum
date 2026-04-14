@@ -1,5 +1,6 @@
 package com.jvmd.lyceum_backend.controller;
 
+import com.jvmd.lyceum_backend.controller.rest.NewsController;
 import com.jvmd.lyceum_backend.model.News;
 import com.jvmd.lyceum_backend.service.JwtService;
 import com.jvmd.lyceum_backend.service.NewsService;
