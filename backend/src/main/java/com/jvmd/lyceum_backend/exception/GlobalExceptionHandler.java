@@ -1,5 +1,7 @@
 package com.jvmd.lyceum_backend.exception;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.ai.retry.NonTransientAiException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -35,6 +37,20 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleAuthError(RuntimeException ex) {
         ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
         problem.setDetail("Invalid username or password");
+        return problem;
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ProblemDetail handleEntityNotFound(EntityNotFoundException ex) {
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problem.setDetail(ex.getMessage());
+        return problem;
+    }
+
+    @ExceptionHandler(NonTransientAiException.class)
+    public ProblemDetail handleAiError(NonTransientAiException ex) {
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.SERVICE_UNAVAILABLE);
+        problem.setDetail("AI service error: " + ex.getMessage());
         return problem;
     }
 }

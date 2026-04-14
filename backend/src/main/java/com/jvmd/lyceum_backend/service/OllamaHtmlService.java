@@ -36,7 +36,18 @@ public class OllamaHtmlService {
                         .build()
         ));
 
-        return response.getResult().getOutput().getText();
+        return stripCodeFences(response.getResult().getOutput().getText());
+    }
+
+    private String stripCodeFences(String text) {
+        if (text == null) return "";
+        String stripped = text.strip();
+        if (stripped.startsWith("```")) {
+            int firstNewline = stripped.indexOf('\n');
+            if (firstNewline != -1) stripped = stripped.substring(firstNewline + 1);
+            if (stripped.endsWith("```")) stripped = stripped.substring(0, stripped.lastIndexOf("```"));
+        }
+        return stripped.strip();
     }
 
     private String buildPrompt(

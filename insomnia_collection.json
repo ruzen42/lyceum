@@ -343,6 +343,260 @@
     },
 
     {
+      "_id": "fld_classroom",
+      "_type": "request_group",
+      "parentId": "wrk_lyceum",
+      "name": "Classroom"
+    },
+    {
+      "_id": "req_classroom_create",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "Create Classroom (ADMIN)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/classroom/create",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title", "value": "Кабинет информатики №21" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Ответ содержит id, title и htmlContent",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('id');\nexpect(body).to.have.property('title');\nexpect(body).to.have.property('htmlContent');\ninsomnia.setEnvironmentVariable('classroomId', body.id);"
+        },
+        {
+          "name": "title совпадает",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.title).to.equal('Кабинет информатики №21');"
+        },
+        {
+          "name": "htmlContent содержит HTML теги",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.htmlContent).to.include('<');"
+        },
+        {
+          "name": "materials — пустой массив",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.materials).to.be.an('array').with.length(0);"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_get_all",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "Get All Classrooms",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/classroom/get-all",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Ответ — массив",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.be.an('array');"
+        },
+        {
+          "name": "Созданный кабинет присутствует в списке",
+          "code": "const body = JSON.parse(response.body);\nconst classroomId = insomnia.getEnvironmentVariable('classroomId');\nconst found = body.some(c => String(c.id) === String(classroomId));\nexpect(found).to.equal(true);"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_get_by_id",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "Get Classroom by ID",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/classroom/{{ _.classroomId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "ID совпадает",
+          "code": "const body = JSON.parse(response.body);\nexpect(String(body.id)).to.equal(String(insomnia.getEnvironmentVariable('classroomId')));"
+        },
+        {
+          "name": "Содержит title, htmlContent и materials",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('title');\nexpect(body).to.have.property('htmlContent');\nexpect(body).to.have.property('materials');"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_get_html",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "Get Classroom HTML",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/classroom/{{ _.classroomId }}/html",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Accept",        "value": "text/html" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Content-Type text/html",
+          "code": "expect(response.headers['content-type']).to.include('text/html');"
+        },
+        {
+          "name": "Тело содержит HTML",
+          "code": "expect(response.body).to.include('<');"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_add_material",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "Add Material (TEACHER)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/classroom/{{ _.classroomId }}/material",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title",       "value": "Лекция по алгоритмам" },
+          { "name": "description", "value": "Материал для 10 класса" },
+          { "name": "files",       "value": "", "type": "file", "fileName": "" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Ответ содержит id и title",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('id');\nexpect(body).to.have.property('title');\ninsomnia.setEnvironmentVariable('materialId', body.id);"
+        },
+        {
+          "name": "title совпадает",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.title).to.equal('Лекция по алгоритмам');"
+        },
+        {
+          "name": "author присутствует",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('author');\nexpect(body.author).to.have.property('username');"
+        },
+        {
+          "name": "fileUrls — массив",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.fileUrls).to.be.an('array');"
+        },
+        {
+          "name": "createdAt присутствует",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('createdAt');"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_add_material_no_file",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "Add Material без файла (TEACHER)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/classroom/{{ _.classroomId }}/material",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title", "value": "Текстовый материал без вложений" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "fileUrls — пустой массив",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.fileUrls).to.be.an('array').with.length(0);"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_html_after_material",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "HTML обновился после добавления материала",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/classroom/{{ _.classroomId }}/html",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Accept",        "value": "text/html" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "HTML содержит название материала",
+          "code": "expect(response.body).to.include('Лекция по алгоритмам');"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_regenerate_html",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "Regenerate HTML (ADMIN)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/classroom/{{ _.classroomId }}/regenerate-html",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "htmlContent обновился",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.htmlContent).to.be.a('string').with.length.greaterThan(0);"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_delete_material",
+      "_type": "request",
+      "parentId": "fld_classroom",
+      "name": "Delete Material (TEACHER)",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/classroom/material/{{ _.materialId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 204",
+          "code": "expect(response.status).to.equal(204);"
+        }
+      ]
+    },
+
+    {
       "_id": "fld_edge",
       "_type": "request_group",
       "parentId": "wrk_lyceum",
@@ -404,6 +658,60 @@
         {
           "name": "Status 401",
           "code": "expect(response.status).to.equal(401);"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_unauthorized",
+      "_type": "request",
+      "parentId": "fld_edge",
+      "name": "Create Classroom без токена — 401",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/classroom/create",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title", "value": "Тест" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 401",
+          "code": "expect(response.status).to.equal(401);"
+        }
+      ]
+    },
+    {
+      "_id": "req_classroom_not_found",
+      "_type": "request",
+      "parentId": "fld_edge",
+      "name": "Classroom 404",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/classroom/99999",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 404",
+          "code": "expect(response.status).to.equal(404);"
+        }
+      ]
+    },
+    {
+      "_id": "req_material_not_found",
+      "_type": "request",
+      "parentId": "fld_edge",
+      "name": "Delete Material 404",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/classroom/material/99999",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 404",
+          "code": "expect(response.status).to.equal(404);"
         }
       ]
     }

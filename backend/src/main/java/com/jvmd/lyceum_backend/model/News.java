@@ -1,8 +1,11 @@
 package com.jvmd.lyceum_backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "news")
@@ -27,7 +30,11 @@ public class News {
     private String imageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"news", "password", "roles", "authorities", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled", "hibernateLazyInitializer"})
     private User user;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
 }
