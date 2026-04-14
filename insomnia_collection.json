@@ -1,0 +1,411 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-04-14",
+  "__export_source": "lyceum-backend",
+  "resources": [
+    {
+      "_id": "env_lyceum",
+      "_type": "environment",
+      "parentId": "wrk_lyceum",
+      "name": "Lyceum Local",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "token": ""
+      }
+    },
+    {
+      "_id": "wrk_lyceum",
+      "_type": "workspace",
+      "name": "Lyceum Backend",
+      "description": "API коллекция для lyceum-backend"
+    },
+
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_lyceum",
+      "name": "Auth"
+    },
+    {
+      "_id": "req_register",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Register",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/register",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"teacher1\",\n  \"email\": \"teacher1@lyceum.ru\",\n  \"password\": \"secret123\"\n}"
+      },
+      "tests": [
+        {
+          "name": "Status 201",
+          "code": "expect(response.status).to.equal(201);"
+        },
+        {
+          "name": "Ответ содержит token",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('token');\ninsomnia.setEnvironmentVariable('token', body.token);"
+        }
+      ]
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/login",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"teacher1\",\n  \"password\": \"secret123\"\n}"
+      },
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Сохранить token в переменную окружения",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('token');\ninsomnia.setEnvironmentVariable('token', body.token);"
+        },
+        {
+          "name": "Ответ содержит username",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.username).to.equal('teacher1');"
+        }
+      ]
+    },
+
+    {
+      "_id": "fld_news",
+      "_type": "request_group",
+      "parentId": "wrk_lyceum",
+      "name": "News"
+    },
+    {
+      "_id": "req_news_get_all",
+      "_type": "request",
+      "parentId": "fld_news",
+      "name": "Get All News",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/news/get-all",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Ответ — массив",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.be.an('array');"
+        }
+      ]
+    },
+    {
+      "_id": "req_news_create",
+      "_type": "request",
+      "parentId": "fld_news",
+      "name": "Create News (с картинкой)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/news/new",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title",   "value": "Новость о выставке" },
+          { "name": "content", "value": "Описание новости про музей" },
+          { "name": "image",   "value": "", "type": "file", "fileName": "" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Ответ содержит id",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('id');"
+        },
+        {
+          "name": "imageUrl не null если файл был передан",
+          "code": "const body = JSON.parse(response.body);\nif (body.imageUrl) {\n  expect(body.imageUrl).to.include('https://');\n}"
+        }
+      ]
+    },
+    {
+      "_id": "req_news_create_no_image",
+      "_type": "request",
+      "parentId": "fld_news",
+      "name": "Create News (без картинки)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/news/new",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title",   "value": "Новость без изображения" },
+          { "name": "content", "value": "Контент без картинки" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "imageUrl равен null",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.imageUrl).to.equal(null);"
+        }
+      ]
+    },
+
+    {
+      "_id": "fld_exhibit",
+      "_type": "request_group",
+      "parentId": "wrk_lyceum",
+      "name": "Museum Exhibit"
+    },
+    {
+      "_id": "req_exhibit_create",
+      "_type": "request",
+      "parentId": "fld_exhibit",
+      "name": "Create Exhibit (с картинками)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/museum-exhibit/create",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title",       "value": "Главный экспонат" },
+          { "name": "description", "value": "Описание главного экспоната" },
+          { "name": "images",      "value": "", "type": "file", "fileName": "" },
+          { "name": "images",      "value": "", "type": "file", "fileName": "" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Ответ содержит id и htmlContent",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('id');\nexpect(body).to.have.property('htmlContent');\ninsomnia.setEnvironmentVariable('exhibitId', body.id);"
+        },
+        {
+          "name": "imageUrls — массив",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.imageUrls).to.be.an('array');"
+        },
+        {
+          "name": "htmlContent содержит HTML теги",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.htmlContent).to.include('<');"
+        }
+      ]
+    },
+    {
+      "_id": "req_exhibit_create_linked",
+      "_type": "request",
+      "parentId": "fld_exhibit",
+      "name": "Create Exhibit (с relatedExhibitIds)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/museum-exhibit/create",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title",             "value": "Связанный экспонат" },
+          { "name": "description",       "value": "Этот экспонат ссылается на первый" },
+          { "name": "relatedExhibitIds", "value": "{{ _.exhibitId }}" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "relatedExhibits не пустой",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.relatedExhibits).to.be.an('array').with.length.greaterThan(0);"
+        },
+        {
+          "name": "htmlContent содержит ссылку на related exhibit",
+          "code": "const body = JSON.parse(response.body);\nconst exhibitId = insomnia.getEnvironmentVariable('exhibitId');\nexpect(body.htmlContent).to.include(String(exhibitId));"
+        }
+      ]
+    },
+    {
+      "_id": "req_exhibit_get_all",
+      "_type": "request",
+      "parentId": "fld_exhibit",
+      "name": "Get All Exhibits",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/museum-exhibit/get-all",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Ответ — массив",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.be.an('array');"
+        }
+      ]
+    },
+    {
+      "_id": "req_exhibit_get_by_id",
+      "_type": "request",
+      "parentId": "fld_exhibit",
+      "name": "Get Exhibit by ID",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/museum-exhibit/{{ _.exhibitId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "ID совпадает",
+          "code": "const body = JSON.parse(response.body);\nexpect(String(body.id)).to.equal(String(insomnia.getEnvironmentVariable('exhibitId')));"
+        },
+        {
+          "name": "Содержит title и htmlContent",
+          "code": "const body = JSON.parse(response.body);\nexpect(body).to.have.property('title');\nexpect(body).to.have.property('htmlContent');"
+        }
+      ]
+    },
+    {
+      "_id": "req_exhibit_get_html",
+      "_type": "request",
+      "parentId": "fld_exhibit",
+      "name": "Get Exhibit HTML (браузер рендер)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/museum-exhibit/{{ _.exhibitId }}/html",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" },
+        { "name": "Accept",        "value": "text/html" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "Content-Type text/html",
+          "code": "expect(response.headers['content-type']).to.include('text/html');"
+        },
+        {
+          "name": "Тело содержит HTML",
+          "code": "expect(response.body).to.include('<');"
+        }
+      ]
+    },
+    {
+      "_id": "req_exhibit_regenerate",
+      "_type": "request",
+      "parentId": "fld_exhibit",
+      "name": "Regenerate HTML (Qwen)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/museum-exhibit/{{ _.exhibitId }}/regenerate-html",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 200",
+          "code": "expect(response.status).to.equal(200);"
+        },
+        {
+          "name": "htmlContent обновился",
+          "code": "const body = JSON.parse(response.body);\nexpect(body.htmlContent).to.be.a('string').with.length.greaterThan(0);"
+        }
+      ]
+    },
+
+    {
+      "_id": "fld_edge",
+      "_type": "request_group",
+      "parentId": "wrk_lyceum",
+      "name": "Edge Cases"
+    },
+    {
+      "_id": "req_exhibit_not_found",
+      "_type": "request",
+      "parentId": "fld_edge",
+      "name": "Exhibit 404",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/museum-exhibit/99999",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ _.token }}" }
+      ],
+      "tests": [
+        {
+          "name": "Status 404",
+          "code": "expect(response.status).to.equal(404);"
+        }
+      ]
+    },
+    {
+      "_id": "req_news_unauthorized",
+      "_type": "request",
+      "parentId": "fld_edge",
+      "name": "Create News без токена — 401",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/news/new",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title",   "value": "Тест" },
+          { "name": "content", "value": "Тест" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 401",
+          "code": "expect(response.status).to.equal(401);"
+        }
+      ]
+    },
+    {
+      "_id": "req_exhibit_unauthorized",
+      "_type": "request",
+      "parentId": "fld_edge",
+      "name": "Create Exhibit без токена — 401",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/museum-exhibit/create",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          { "name": "title",       "value": "Тест" },
+          { "name": "description", "value": "Тест" }
+        ]
+      },
+      "tests": [
+        {
+          "name": "Status 401",
+          "code": "expect(response.status).to.equal(401);"
+        }
+      ]
+    }
+  ]
+}
