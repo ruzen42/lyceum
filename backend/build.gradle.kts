@@ -20,6 +20,7 @@ repositories {
 extra["springAiVersion"] = "2.0.0-M4"
 
 dependencies {
+	implementation("software.amazon.awssdk:s3:2.27.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
