@@ -4,14 +4,15 @@ import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from '@/components/ui/sonner'
 import { AuthProvider } from '@/lib/auth-context'
 import { ThemeProvider } from 'next-themes'
+import { Navigation } from '@/components/navigation'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Lyceum - School Platform',
-  description: 'A comprehensive school platform for news, museum, and classrooms',
+  title: 'Лицей - Образовательная платформа',
+  description: 'Комплексная образовательная платформа для новостей, музея и классов',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -42,11 +43,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="ru" className="bg-background">
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <AuthProvider>
-            {children}
+            <Navigation />
+            <main className="min-h-screen">
+              {children}
+            </main>
             <Toaster position="top-right" richColors />
           </AuthProvider>
         </ThemeProvider>

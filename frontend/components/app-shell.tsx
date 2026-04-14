@@ -3,7 +3,6 @@
 import { useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
-import { AppSidebar } from "@/components/app-sidebar"
 import { TopBar } from "@/components/top-bar"
 import { Spinner } from "@/components/ui/spinner"
 
@@ -32,9 +31,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background">
-      <AppSidebar />
       <TopBar />
-      <main className="md:ml-64 pt-16 min-h-screen">
+      <main className="pt-16 min-h-screen">
         <div className="p-4 md:p-6">{children}</div>
       </main>
     </div>
