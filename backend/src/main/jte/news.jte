@@ -51,7 +51,7 @@
                                         @if(news.getUser() != null)
                                             <span>✍ ${news.getUser().getUsername()}</span>
                                         @endif
-                                        <span>🗓 ${news.getCreatedAt().toLocalDate()}</span>
+                                        <span>🗓 ${news.getCreatedAt().toLocalDate().toString()}</span>
                                     </div>
                                 </div>
                             </div>

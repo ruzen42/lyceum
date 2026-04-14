@@ -68,7 +68,7 @@
                                     @endif
 
                                     <div class="card-meta" style="margin-top:1rem">
-                                        <span style="font-size:0.78rem">Добавлено: ${p.getCreatedAt().toLocalDate()}</span>
+                                        <span style="font-size:0.78rem">Добавлено: ${p.getCreatedAt().toLocalDate().toString()}</span>
                                     </div>
                                 </div>
                             </div>

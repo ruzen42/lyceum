@@ -277,7 +277,7 @@
                                                         ${app.getStatus() == AdmissionApplication.ApplicationStatus.PENDING ? "Ожидает" : app.getStatus() == AdmissionApplication.ApplicationStatus.REVIEWED ? "Рассмотрено" : "Отклонено"}
                                                     </span>
                                                 </td>
-                                                <td style="font-size:0.8rem">${app.getCreatedAt().toLocalDate()}</td>
+                                                <td style="font-size:0.8rem">${app.getCreatedAt().toLocalDate().toString()}</td>
                                             </tr>
                                         @endfor
                                     </tbody>

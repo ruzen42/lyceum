@@ -37,7 +37,7 @@
                                         <p style="margin-top:0.5rem">${v.getDescription()}</p>
                                     @endif
                                     <div style="margin-top:0.75rem;font-size:0.78rem;color:var(--text-muted)">
-                                        Опубликовано: ${v.getCreatedAt().toLocalDate()}
+                                        Опубликовано: ${v.getCreatedAt().toLocalDate().toString()}
                                     </div>
                                 </div>
                                 <span class="badge badge-success" style="flex-shrink:0">Открыта</span>
