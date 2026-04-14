@@ -1,18 +1,13 @@
-import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { Toaster } from '@/components/ui/sonner'
-import { AuthProvider } from '@/lib/auth-context'
-import { ThemeProvider } from 'next-themes'
-import { Navigation } from '@/components/navigation'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: 'Лицей - Образовательная платформа',
-  description: 'Комплексная образовательная платформа для новостей, музея и классов',
+  title: 'Первый IT-лицей | Петропавловск',
+  description: 'Первый городской общеобразовательный IT-лицей города Петропавловска. 35 лет создаём будущее.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -29,12 +24,8 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
       },
     ],
-    apple: '/img.png',
+    apple: '/apple-icon.png',
   },
-}
-
-export const viewport: Viewport = {
-  themeColor: '#1d4ed8',
 }
 
 export default function RootLayout({
@@ -44,16 +35,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="bg-background">
-      <body className="font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
-          <AuthProvider>
-            <Navigation />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <Toaster position="top-right" richColors />
-          </AuthProvider>
-        </ThemeProvider>
+      <body className={`${inter.variable} font-sans antialiased`}>
+        {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
