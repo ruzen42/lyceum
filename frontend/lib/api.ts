@@ -33,6 +33,31 @@ export interface StudentPortfolio {
   createdAt: string
 }
 
+export interface Vacancy {
+  id: number
+  title: string
+  description?: string
+  active: boolean
+  createdAt: string
+}
+
+export interface SiteStats {
+  newsCount: number
+  achievementsCount: number
+  portfolioCount: number
+  applicationsCount: number
+}
+
+export interface AdmissionApplicationRequest {
+  parentName: string
+  childName: string
+  childAge: number
+  phone: string
+  email?: string
+  classType: "1_CLASS" | "PRESCHOOL"
+  message?: string
+}
+
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
     headers: { "Content-Type": "application/json", ...options?.headers },
@@ -51,5 +76,18 @@ export const api = {
   },
   portfolio: {
     getAll: () => apiFetch<StudentPortfolio[]>("/api/portfolio/get-all"),
+  },
+  vacancies: {
+    getAll: () => apiFetch<Vacancy[]>("/api/vacancies/get-all"),
+  },
+  stats: {
+    get: () => apiFetch<SiteStats>("/api/stats"),
+  },
+  admission: {
+    apply: (data: AdmissionApplicationRequest) =>
+      apiFetch<{ id: number }>("/api/admission/apply", {
+        method: "POST",
+        body: JSON.stringify(data),
+      }),
   },
 }
