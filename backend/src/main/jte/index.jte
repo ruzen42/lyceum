@@ -18,17 +18,17 @@
     userRoles = userRoles,
     content = @`
         <section class="hero">
-            <div class="container">
+            <div class="container bellota-bold">
                 <h1>Добро пожаловать в <span>Первый IT лицей</span></h1>
-                <p>Место, где рождаются знания, формируется характер и открываются возможности для каждого ученика.</p>
-                <div class="hero-actions">
+                <p>Хочешь быть первым, учись в первом.</p>
+                <div class="hero-actions bellota-bold">
                     <a href="/admission" class="btn btn-accent btn-lg">Подать заявку</a>
                     <a href="/news" class="btn btn-outline-white btn-lg">Новости школы</a>
                 </div>
             </div>
         </section>
 
-        <section class="stats-bar">
+        <section class="stats-bar bellota-bold">
             <div class="container">
                 <div class="stats-grid">
                     <div class="stat-item">
@@ -51,7 +51,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section bellota-bold">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Последние новости</h2>

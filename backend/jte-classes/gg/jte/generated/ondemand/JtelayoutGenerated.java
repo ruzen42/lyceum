@@ -5,12 +5,12 @@ import java.util.Set;
 @SuppressWarnings("unchecked")
 public final class JtelayoutGenerated {
 	public static final String JTE_NAME = "layout.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,4,15,15,15,15,27,27,27,27,27,27,27,27,27,28,28,28,28,28,28,28,28,28,29,29,29,29,29,29,29,29,29,30,30,30,30,30,30,30,30,30,31,31,31,31,31,31,31,31,31,32,32,32,32,32,32,32,32,32,33,33,33,33,33,33,33,33,33,34,34,34,34,34,34,34,34,34,37,37,38,38,40,40,42,42,42,44,44,46,46,60,60,61,61,63,63,64,64,66,66,71,71,71,109,109,109,4,5,6,7,8,8,8,8};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,4,15,15,15,15,31,31,31,31,31,31,31,31,31,32,32,32,32,32,32,32,32,32,33,33,33,33,33,33,33,33,33,34,34,34,34,34,34,34,34,34,35,35,35,35,35,35,35,35,35,36,36,36,36,36,36,36,36,36,37,37,37,37,37,37,37,37,37,38,38,38,38,38,38,38,38,38,41,41,42,42,44,44,46,46,46,48,48,50,50,64,64,65,65,67,67,68,68,70,70,75,75,75,113,113,113,4,5,6,7,8,8,8,8};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String title, Content content, String currentUser, Set<Role> userRoles, String activePage) {
 		jteOutput.writeContent("\n<!DOCTYPE html>\n<html lang=\"ru\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(title);
-		jteOutput.writeContent(" — Первый IT лицей</title>\n    <link rel=\"stylesheet\" href=\"/css/main.css\">\n</head>\n<body>\n\n<header class=\"site-header\">\n    <div class=\"header-inner\">\n        <a href=\"/\" class=\"site-logo-wrapper\">\n            <img src=\"/img/icon.png\" alt=\"Lyceum Logo\" class=\"header-logo-img\">\n        </a>\n        <nav class=\"site-nav\">\n\n            <a href=\"/\"");
+		jteOutput.writeContent(" — Первый IT лицей</title>\n    <link rel=\"stylesheet\" href=\"/css/main.css\">\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=Pacifico&display=swap\" rel=\"stylesheet\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap\" rel=\"stylesheet\">\n</head>\n<body>\n\n<header class=\"site-header\">\n    <div class=\"header-inner\">\n        <a href=\"/\" class=\"site-logo-wrapper\">\n            <img src=\"/img/icon.png\" alt=\"Lyceum Logo\" class=\"header-logo-img\">\n        </a>\n        <nav class=\"site-nav bellota-bold\">\n\n            <a href=\"/\"");
 		var __jte_html_attribute_0 = activePage.equals("home") ? "active" : "";
 		if (gg.jte.runtime.TemplateUtils.isAttributeRendered(__jte_html_attribute_0)) {
 			jteOutput.writeContent(" class=\"");

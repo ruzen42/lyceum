@@ -15,6 +15,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title} — Первый IT лицей</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -23,7 +27,7 @@
         <a href="/" class="site-logo-wrapper">
             <img src="/img/icon.png" alt="Lyceum Logo" class="header-logo-img">
         </a>
-        <nav class="site-nav">
+        <nav class="site-nav bellota-bold">
 
             <a href="/" class="${activePage.equals("home") ? "active" : ""}">Главная</a>
             <a href="/news" class="${activePage.equals("news") ? "active" : ""}">Новости</a>

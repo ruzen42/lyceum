@@ -14,7 +14,7 @@
     currentUser = currentUser,
     userRoles = userRoles,
     content = @`
-        <div class="page-header">
+        <div class="page-header bellota-bold">
             <div class="container">
                 <h1>Новости</h1>
                 <p>Актуальные события и публикации нашей школы</p>
