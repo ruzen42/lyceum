@@ -18,7 +18,10 @@ public class News {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String content;
 
     private String imageUrl;
