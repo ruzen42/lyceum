@@ -52,8 +52,11 @@
                                 <span style="font-size:0.78rem;color:var(--text-muted);margin-left:auto">загрузи новый чтобы заменить</span>
                             </div>
                         @endif
-                        <input type="file" name="file" class="form-control" accept=".docx"
-                               ${portfolio != null && portfolio.getFileUrl() != null ? "" : "required"}>
+                        @if(portfolio == null || portfolio.getFileUrl() == null)
+                        <input type="file" name="file" class="form-control" accept=".docx" required>
+                        @else
+                        <input type="file" name="file" class="form-control" accept=".docx">
+                        @endif
                         <div class="form-hint">Только файлы в формате .docx</div>
                     </div>
 
