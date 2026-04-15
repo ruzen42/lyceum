@@ -7,6 +7,7 @@
   <img alt="Status" src="https://img.shields.io/badge/status-beta-yellow">
   <img alt="License" src="https://img.shields.io/badge/license-ISC-blue">
 </p>
+
 ## Стек технологий
 
 | Слой | Технология |
