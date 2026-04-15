@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "4.0.5"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("gg.jte.gradle") version "3.2.3"
 }
 
 group = "com.jvmd"
@@ -49,6 +50,15 @@ dependencyManagement {
 	imports {
 		mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
 	}
+}
+
+jte {
+	contentType = gg.jte.ContentType.Html
+	binaryStaticContent = true
+}
+
+tasks.compileJava {
+	dependsOn(tasks.generateJte)
 }
 
 tasks.withType<Test> {
