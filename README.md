@@ -1,7 +1,12 @@
-# lyceum
-
-lyceum - это веб-сайт предназначенный для школы.
-
+<h1 align="center">lyceum-website</h1>
+<p align="center" >
+  <img alt="Java" src="https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white">
+  <img alt="Spring Boot" src="https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=spring-boot&logoColor=white">
+  <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white">
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white">
+  <img alt="Status" src="https://img.shields.io/badge/status-beta-yellow">
+  <img alt="License" src="https://img.shields.io/badge/license-ISC-blue">
+</p>
 ## Стек технологий
 
 | Слой | Технология |

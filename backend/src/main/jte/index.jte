@@ -19,7 +19,7 @@
     content = @`
         <section class="hero">
             <div class="container bellota-bold">
-                <h1>Добро пожаловать в <span>Первый IT лицей</span></h1>
+                <h1 class="x">Добро пожаловать в <span>Первый IT лицей</span></h1>
                 <p>Хочешь быть первым, учись в первом.</p>
                 <div class="hero-actions bellota-bold">
                     <a href="/admission" class="btn btn-accent btn-lg">Подать заявку</a>
