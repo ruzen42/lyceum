@@ -355,7 +355,6 @@
             document.querySelectorAll('.admin-sidebar a').forEach(a => a.classList.remove('active'));
             if (link) link.classList.add('active');
         }
-        // Activate first sidebar link
         const firstLink = document.querySelector('.admin-sidebar a');
         if (firstLink) firstLink.classList.add('active');
         </script>
