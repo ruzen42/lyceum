@@ -19,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
@@ -42,6 +43,8 @@
             @if(currentUser != null)
                 @if(userRoles != null && (userRoles.contains(Role.ROLE_ADMIN) || userRoles.contains(Role.ROLE_TEACHER)))
                     <a href="/admin" class="btn btn-accent btn-sm">Панель</a>
+                @elseif(userRoles != null && userRoles.contains(Role.ROLE_STUDENT))
+                    <a href="/student/portfolio" class="btn btn-accent btn-sm">Моё портфолио</a>
                 @endif
                 <form method="post" action="/logout" style="margin:0">
                     <button type="submit" class="btn btn-outline-white btn-sm">${currentUser}</button>
@@ -65,6 +68,8 @@
         @if(currentUser != null)
             @if(userRoles != null && (userRoles.contains(Role.ROLE_ADMIN) || userRoles.contains(Role.ROLE_TEACHER)))
                 <a href="/admin">Панель управления</a>
+            @elseif(userRoles != null && userRoles.contains(Role.ROLE_STUDENT))
+                <a href="/student/portfolio">Моё портфолио</a>
             @endif
         @else
             <a href="/login">Войти</a>

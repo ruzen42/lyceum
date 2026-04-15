@@ -29,11 +29,8 @@ public class StudentPortfolioController {
     public ResponseEntity<StudentPortfolio> create(
             @RequestParam String studentName,
             @RequestParam String grade,
-            @RequestParam String bio,
-            @RequestPart(value = "image", required = false) MultipartFile image,
-            @RequestParam List<String> skills,
-            @RequestParam List<String> achievements
+            @RequestPart("file") MultipartFile file
     ) throws IOException {
-        return ResponseEntity.ok(portfolioService.create(studentName, grade, bio, image, skills, achievements));
+        return ResponseEntity.ok(portfolioService.create(studentName, grade, file));
     }
 }

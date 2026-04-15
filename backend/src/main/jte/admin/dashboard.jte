@@ -1,11 +1,13 @@
 @import com.jvmd.lyceum_backend.model.AdmissionApplication
 @import com.jvmd.lyceum_backend.model.Role
+@import com.jvmd.lyceum_backend.model.User
 @import java.util.List
 @import java.util.Set
 
 @param String currentUser
 @param Set<Role> userRoles
 @param List<AdmissionApplication> applications = null
+@param List<User> users = null
 @param String success = null
 @param String error = null
 @param boolean isAdmin = false
@@ -21,17 +23,18 @@
             <aside class="admin-sidebar">
                 <h3 class="bellota-bold">Контент</h3>
                 @if(isTeacher)
-                    <a href="#news" onclick="showTab('news',this);return false">📰 Новости</a>
-                    <a href="#achievements" onclick="showTab('achievements',this);return false">🏆 Достижения</a>
-                    <a href="#portfolio" onclick="showTab('portfolio',this);return false">👤 Портфолио</a>
-                    <a href="#museum" onclick="showTab('museum',this);return false">🏛️ Музей</a>
-                    <a href="#materials" onclick="showTab('materials',this);return false">📄 Материалы</a>
+                    <a href="#news" onclick="showTab('news',this);return false"><span class="material-icons">article</span> Новости</a>
+                    <a href="#achievements" onclick="showTab('achievements',this);return false"><span class="material-icons">emoji_events</span> Достижения</a>
+                    <a href="#portfolio" onclick="showTab('portfolio',this);return false"><span class="material-icons">person</span> Портфолио</a>
+                    <a href="#museum" onclick="showTab('museum',this);return false"><span class="material-icons">museum</span> Музей</a>
+                    <a href="#materials" onclick="showTab('materials',this);return false"><span class="material-icons">description</span> Материалы</a>
                 @endif
                 @if(isAdmin)
                     <h3 class="bellota-bold">Управление</h3>
-                    <a href="#vacancies" onclick="showTab('vacancies',this);return false">💼 Вакансии</a>
-                    <a href="#classrooms" onclick="showTab('classrooms',this);return false">📚 Кабинеты</a>
-                    <a href="#admissions" onclick="showTab('admissions',this);return false">📋 Заявки</a>
+                    <a href="#vacancies" onclick="showTab('vacancies',this);return false"><span class="material-icons">work</span> Вакансии</a>
+                    <a href="#classrooms" onclick="showTab('classrooms',this);return false"><span class="material-icons">menu_book</span> Кабинеты</a>
+                    <a href="#admissions" onclick="showTab('admissions',this);return false"><span class="material-icons">assignment</span> Заявки</a>
+                    <a href="#users" onclick="showTab('users',this);return false"><span class="material-icons">group</span> Пользователи</a>
                 @endif
             </aside>
 
@@ -59,7 +62,7 @@
 
                 @if(isTeacher)
                     <div class="admin-section" id="tab-news">
-                        <h2 class="bellota-bold">📰 Добавить новость</h2>
+                        <h2 class="bellota-bold"><span class="material-icons">article</span> Добавить новость</h2>
                         <form method="post" action="/admin/news" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group">
@@ -80,7 +83,7 @@
                     </div>
 
                     <div class="admin-section" id="tab-achievements" style="display:none">
-                        <h2 class="bellota-bold">🏆 Добавить достижение</h2>
+                        <h2 class="bellota-bold"><span class="material-icons">emoji_events</span> Добавить достижение</h2>
                         <form method="post" action="/admin/achievements">
                             <div class="form-row">
                                 <div class="form-group">
@@ -122,7 +125,7 @@
 
                     <%-- ─── ПОРТФОЛИО ─── --%>
                     <div class="admin-section" id="tab-portfolio" style="display:none">
-                        <h2 class="bellota-bold">👤 Добавить портфолио</h2>
+                        <h2 class="bellota-bold"><span class="material-icons">person</span> Добавить портфолио</h2>
                         <form method="post" action="/admin/portfolio" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group">
@@ -135,22 +138,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Биография *</label>
-                                <textarea name="bio" class="form-control" rows="3" required placeholder="Краткое описание студента..."></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Фото</label>
-                                <input type="file" name="image" class="form-control" accept="image/*">
-                            </div>
-                            <div class="form-group">
-                                <label>Навыки (через запятую) *</label>
-                                <input type="text" name="skillsRaw" class="form-control" required placeholder="Математика, Программирование, Физика">
-                                <div class="form-hint">Введите навыки через запятую</div>
-                            </div>
-                            <div class="form-group">
-                                <label>Достижения (через запятую) *</label>
-                                <input type="text" name="achievementsRaw" class="form-control" required placeholder="Победитель олимпиады, 1 место на конкурсе">
-                                <div class="form-hint">Введите достижения через запятую</div>
+                                <label>Файл портфолио (.docx) *</label>
+                                <input type="file" name="file" class="form-control" accept=".docx" required>
+                                <div class="form-hint">Только файлы в формате .docx</div>
                             </div>
                             <button type="submit" class="btn btn-primary">Добавить портфолио</button>
                         </form>
@@ -158,7 +148,7 @@
 
                     <%-- ─── МУЗЕЙ ─── --%>
                     <div class="admin-section" id="tab-museum" style="display:none">
-                        <h2 class="bellota-bold">🏛️ Добавить экспонат</h2>
+                        <h2 class="bellota-bold"><span class="material-icons">museum</span> Добавить экспонат</h2>
                         <form method="post" action="/admin/museum" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Название *</label>
@@ -179,7 +169,7 @@
 
                     <%-- ─── МАТЕРИАЛЫ ─── --%>
                     <div class="admin-section" id="tab-materials" style="display:none">
-                        <h2 class="bellota-bold">📄 Добавить материал в кабинет</h2>
+                        <h2 class="bellota-bold"><span class="material-icons">description</span> Добавить материал в кабинет</h2>
                         <form method="post" action="/admin/materials" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>ID кабинета *</label>
@@ -208,7 +198,7 @@
 
                 @if(isAdmin)
                     <div class="admin-section" id="tab-vacancies" style="${isTeacher ? "display:none" : ""}">
-                        <h2 class="bellota-bold">💼 Управление вакансиями</h2>
+                        <h2 class="bellota-bold"><span class="material-icons">work</span> Управление вакансиями</h2>
                         <form method="post" action="/admin/vacancies" style="margin-bottom:1.5rem">
                             <div class="form-group">
                                 <label>Название вакансии *</label>
@@ -223,7 +213,7 @@
                     </div>
 
                     <div class="admin-section" id="tab-classrooms" style="display:none">
-                        <h2 class="bellota-bold">📚 Создать кабинет</h2>
+                        <h2 class="bellota-bold"><span class="material-icons">menu_book</span> Создать кабинет</h2>
                         <form method="post" action="/admin/classrooms">
                             <div class="form-group">
                                 <label>Название кабинета *</label>
@@ -235,10 +225,10 @@
 
                     <%-- ─── ЗАЯВКИ ─── --%>
                     <div class="admin-section" id="tab-admissions" style="display:none">
-                        <h2 class="bellota-bold">📋 Заявки на поступление</h2>
+                        <h2 class="bellota-bold"><span class="material-icons">assignment</span> Заявки на поступление</h2>
                         @if(applications == null || applications.isEmpty())
                             <div class="empty-state" style="padding:1.5rem 0">
-                                <div class="empty-state-icon">📋</div>
+                                <div class="empty-state-icon"><span class="material-icons" style="font-size:3rem">assignment</span></div>
                                 <p>Заявок пока нет</p>
                             </div>
                         @else
@@ -281,9 +271,81 @@
                             </div>
                         @endif
                     </div>
+
+                    <%-- ─── ПОЛЬЗОВАТЕЛИ ─── --%>
+                    <div class="admin-section" id="tab-users" style="display:none">
+                        <h2 class="bellota-bold"><span class="material-icons">group</span> Создать аккаунт</h2>
+                        <form method="post" action="/admin/users" style="margin-bottom:2rem">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Имя пользователя *</label>
+                                    <input type="text" name="username" class="form-control" required placeholder="ivanov_ivan">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" name="email" class="form-control" required placeholder="ivan@lyceum.kz">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Пароль *</label>
+                                    <input type="password" name="password" class="form-control" required placeholder="Минимум 6 символов" minlength="6">
+                                </div>
+                                <div class="form-group">
+                                    <label>Роль *</label>
+                                    <select name="role" class="form-control" required>
+                                        <option value="STUDENT">Ученик</option>
+                                        <option value="TEACHER">Учитель</option>
+                                        <option value="ADMIN">Администратор</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Создать аккаунт</button>
+                        </form>
+
+                        <h3 class="bellota-bold" style="font-size:1rem;margin-bottom:1rem">Все пользователи</h3>
+                        @if(users == null || users.isEmpty())
+                            <div class="empty-state" style="padding:1rem 0">
+                                <p style="color:var(--text-muted)">Пользователей пока нет</p>
+                            </div>
+                        @else
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Имя пользователя</th>
+                                            <th>Email</th>
+                                            <th>Роли</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for(User u : users)
+                                            <tr>
+                                                <td><strong>${u.getUsername()}</strong></td>
+                                                <td style="color:var(--text-muted)">${u.getEmail()}</td>
+                                                <td>
+                                                    @for(Role r : u.getRoles())
+                                                        <span class="badge ${r == Role.ROLE_ADMIN ? "badge-danger" : r == Role.ROLE_TEACHER ? "badge-secondary" : r == Role.ROLE_STUDENT ? "badge-primary" : ""}">
+                                                            ${r == Role.ROLE_ADMIN ? "Админ" : r == Role.ROLE_TEACHER ? "Учитель" : r == Role.ROLE_STUDENT ? "Ученик" : "Пользователь"}
+                                                        </span>
+                                                    @endfor
+                                                </td>
+                                            </tr>
+                                        @endfor
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    </div>
                 @endif
             </div>
         </div>
+
+        <style>
+            .admin-sidebar a { display: flex; align-items: center; gap: 0.5rem; }
+            .admin-sidebar a .material-icons { font-size: 1.1rem; }
+            .admin-section h2 .material-icons { font-size: 1.2rem; vertical-align: middle; margin-right: 0.25rem; }
+        </style>
 
         <script>
         function showTab(tabName, link) {

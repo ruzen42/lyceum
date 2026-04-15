@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,6 +29,7 @@ public class AdminWebController {
     private final ClassroomService classroomService;
     private final VacancyService vacancyService;
     private final AdmissionService admissionService;
+    private final UserService userService;
 
     @GetMapping
     public String dashboard(Model model, @AuthenticationPrincipal User user) {
@@ -42,6 +43,7 @@ public class AdminWebController {
 
         if (isAdmin) {
             model.addAttribute("applications", admissionService.getAll());
+            model.addAttribute("users", userService.findAll());
         }
 
         return "admin/dashboard";
@@ -94,17 +96,10 @@ public class AdminWebController {
     @PreAuthorize("hasRole('TEACHER')")
     public String createPortfolio(@RequestParam String studentName,
                                   @RequestParam String grade,
-                                  @RequestParam String bio,
-                                  @RequestParam(required = false) MultipartFile image,
-                                  @RequestParam String skillsRaw,
-                                  @RequestParam String achievementsRaw,
+                                  @RequestParam("file") MultipartFile file,
                                   RedirectAttributes redirectAttributes) {
         try {
-            List<String> skills = Arrays.stream(skillsRaw.split(","))
-                    .map(String::trim).filter(s -> !s.isBlank()).toList();
-            List<String> achievements = Arrays.stream(achievementsRaw.split(","))
-                    .map(String::trim).filter(s -> !s.isBlank()).toList();
-            portfolioService.create(studentName, grade, bio, image, skills, achievements);
+            portfolioService.create(studentName, grade, file);
             redirectAttributes.addFlashAttribute("success", "Портфолио успешно добавлено!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Ошибка: " + e.getMessage());
@@ -176,6 +171,23 @@ public class AdminWebController {
         try {
             classroomService.create(title);
             redirectAttributes.addFlashAttribute("success", "Кабинет успешно создан!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Ошибка: " + e.getMessage());
+        }
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/users")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String createUser(@RequestParam String username,
+                             @RequestParam String email,
+                             @RequestParam String password,
+                             @RequestParam String role,
+                             RedirectAttributes redirectAttributes) {
+        try {
+            Set<Role> roles = Set.of(Role.valueOf("ROLE_" + role.toUpperCase()));
+            userService.createUser(username, email, password, roles);
+            redirectAttributes.addFlashAttribute("success", "Аккаунт «" + username + "» успешно создан!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Ошибка: " + e.getMessage());
         }

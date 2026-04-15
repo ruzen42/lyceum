@@ -54,7 +54,7 @@
                                                 @endif
                                                 @if(m.getAuthor() != null)
                                                     <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem">
-                                                        ✍ ${m.getAuthor().getUsername()} · ${m.getCreatedAt().toLocalDate()}
+                                                        ✍ ${m.getAuthor().getUsername()} · ${m.getCreatedAt().toLocalDate().toString()}
                                                     </div>
                                                 @endif
                                             </div>
